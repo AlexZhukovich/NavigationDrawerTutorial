@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.alexzh.navigationdrawertutorial.MainActivity">
+
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/general">
+        <item
+            android:id="@+id/item_germany"
+            android:title="Germany" />
+        <item
+            android:id="@+id/item_canada"
+            android:title="Canada" />
+        <item
+            android:id="@+id/item_australia"
+            android:title="Australia" />
+        <item
+            android:id="@+id/item_usa"
+            android:title="USA" />
+    </group>
+
+    <group android:id="@+id/special">
+        <item
+            android:id="@+id/item_settings"
+            android:icon="@drawable/ic_settings_black_48dp"
+            android:title="Settings" />
+    </group>
+</menu>
