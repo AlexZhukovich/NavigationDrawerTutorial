@@ -4,7 +4,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +13,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         NavigationView.OnNavigationItemSelectedListener {
-
+    private final static String COUNTRY_DETAIL = "country_detail";
     private final static String STATE_SELECTED_POSITION = "position";
 
     private Toolbar mToolbar;
@@ -76,22 +75,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (menuItem.getItemId()) {
             case R.id.item_germany:
                 mCurrentSelectedPosition = 0;
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, CountryFragment.newInstance("Germany")).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, CountryFragment.newInstance("Germany"))
+                        .addToBackStack(COUNTRY_DETAIL)
+                        .commit();
                 mDrawerLayout.closeDrawers();
                 return true;
             case R.id.item_canada:
                 mCurrentSelectedPosition = 1;
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, CountryFragment.newInstance("Canada")).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, CountryFragment.newInstance("Canada"))
+                        .addToBackStack(COUNTRY_DETAIL)
+                        .commit();
                 mDrawerLayout.closeDrawers();
                 return true;
             case R.id.item_australia:
                 mCurrentSelectedPosition = 2;
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, CountryFragment.newInstance("Australia")).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, CountryFragment.newInstance("Australia"))
+                        .addToBackStack(COUNTRY_DETAIL)
+                        .commit();
                 mDrawerLayout.closeDrawers();
                 return true;
             case R.id.item_usa:
                 mCurrentSelectedPosition = 3;
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, CountryFragment.newInstance("USA")).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, CountryFragment.newInstance("USA"))
+                        .addToBackStack(COUNTRY_DETAIL)
+                        .commit();
                 mDrawerLayout.closeDrawers();
                 return true;
             case R.id.item_settings:
@@ -100,7 +111,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Snackbar.make(findViewById(R.id.container), "Settings", Snackbar.LENGTH_SHORT).show();
                 return true;
         }
-
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(mNavigationView))
+            mDrawerLayout.closeDrawers();
+        else
+            super.onBackPressed();
     }
 }
